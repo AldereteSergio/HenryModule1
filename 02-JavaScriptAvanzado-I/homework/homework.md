@@ -5,6 +5,8 @@
 Determiná que será impreso en la consola, sin ejecutar el código.
 
 > Investiga cuál es la diferencia entre declarar una variable con `var` y directamente asignarle un valor.
+Respuesta: La diferencia tiene 2 partes, dentro de una funcion se diferencia en el alcance, una variable con "var" es accesible dentro de la misma funcion, de manera local, en cambio al no estar declarada con "var" tiene un alcance global, es decir que va a ser accesible desde cualquier parte del codigo.
+Por otro lado, se debe al hoisting, las var son elevadas, esto significa que se mueven al principio del codigo, pero su asignacion se mantiene en el lugar original, por lo que se puede acceder a la variable antes de que esta haya sido declarada. Si no esta declarada, no se realiza el hosting, por lo que intentar acceder a la variable antes de su asignacion resultara en un error.
 
 ```javascript
 x = 1;
@@ -26,6 +28,8 @@ var c = function (a, b, c) {
 c(8, 9, 10);
 console.log(b);
 console.log(x);
+// console.log(b); 10
+// console.log(x); x is not defined
 ```
 
 ```javascript
@@ -37,6 +41,8 @@ function foo() {
 }
 var bar = 1;
 baz = 2;
+// console.log(bar); undefined
+// console.log(baz); baz is not defined
 ```
 
 ```javascript
@@ -45,6 +51,7 @@ if (true) {
    var instructor = 'Franco';
 }
 console.log(instructor);
+// console.log(instructor); Franco
 ```
 
 ```javascript
@@ -57,6 +64,7 @@ console.log(instructor);
    }
 })();
 console.log(instructor);
+// Tony
 ```
 
 ```javascript
@@ -70,6 +78,11 @@ if (true) {
 }
 console.log(instructor);
 console.log(pm);
+//The Flash
+//Reverse Flash
+
+//The Flash
+//Franco
 ```
 
 ### Coerción de Datos
@@ -77,22 +90,22 @@ console.log(pm);
 ¿Cuál crees que será el resultado de la ejecución de estas operaciones?:
 
 ```javascript
-6 / "3"
-"2" * "3"
-4 + 5 + "px"
-"$" + 4 + 5
-"4" - 2
-"4px" - 2
-7 / 0
-{}[0]
-parseInt("09")
-5 && 2
-2 && 5
-5 || 0
-0 || 5
-[3]+[3]-[10]
-3>2>1
-[] == ![]
+6 / "3" // 2
+"2" * "3" // 6
+4 + 5 + "px" // 9px
+"$" + 4 + 5 // $45
+"4" - 2 // 2
+"4px" - 2 // NaN
+7 / 0 // Infinity
+{}[0] // undefined
+parseInt("09") // 09
+5 && 2 // 2
+2 && 5 // 5
+5 || 0 // 5
+0 || 5 // 5
+[3]+[3]-[10] // 23 al sumar concatena 33 y al restar se usa toString()
+3>2>1 // false
+[] == ![] // true , truthy == false, "" == false, 0 == 0.
 ```
 
 > Si te quedó alguna duda repasá con [este artículo](http://javascript.info/tutorial/object-conversion).
@@ -113,6 +126,7 @@ function test() {
 }
 
 test();
+// 2
 ```
 
 Y el de este código? :
@@ -171,6 +185,7 @@ function printing() {
 }
 
 printing();
+1 - 4 - 3 - 2, El setTimeout entra en una cola especial, el console.log(1 y el 4) se ejecutan de manera asincrona, tiene una prioridad de ejecución que solo se ve afectaba por la posicion en la que estan escritas. Por otro lado, los setTimeOut, entran en una cola de ejecución.
 ```
 
 </br >
